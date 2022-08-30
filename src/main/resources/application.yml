@@ -1,0 +1,15 @@
+server:
+  port: 9900
+spring:
+  redis:
+    host: localhost
+    port: 55001
+    password: redispw
+    lettuce:
+      pool:
+        max-active: 100
+        min-idle: 5
+        max-idle: 8
+        max-wait: 5000
+    timeout: 15000
+
