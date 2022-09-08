@@ -23,4 +23,18 @@ class BasicUsageTests {
         val valueFromRedis = this.redisTemplate.opsForValue().get(name)
         assertEquals(valueFromRedis, value)
     }
+
+    @Test
+    fun testOpsForHash () {
+        redisTemplate.opsForHash<String, Any>().put("me", "name", "zzz")
+        println(redisTemplate.opsForHash<String, Any>().entries("me"))
+        assertEquals(redisTemplate.opsForHash<String, Any>().get("me", "name"), "zzz")
+        val map = HashMap<String, Any>()
+        map["name"] = "zzz1"
+        map["age"] = 18
+        redisTemplate.opsForHash<String,Any>().putAll("myBro", map)
+        println(redisTemplate.opsForHash<String, Any>().entries("myBro"))
+        assertEquals(redisTemplate.opsForHash<String, Any>().get("myBro", "age"), 18)
+        assertEquals(redisTemplate.opsForHash<String, Any>().entries("myBro").entries, map.entries)
+    }
 }
